@@ -1,14 +1,19 @@
 FROM node:20
 
 # Create app directory
-WORKDIR /app/src/app
+WORKDIR /app
 
-COPY package.json ./
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-
+# Install app dependencies
 RUN npm install
 
+# Bundle app source
 COPY . .
 
-EXPOSE 3434:3434
+# Expose port
+EXPOSE 3434
+
+# Start the app
 CMD [ "npm", "start" ]
