@@ -1,0 +1,26 @@
+{
+  "name": "bot_nodejs_assesment",
+  "version": "1.0.0",
+  "description": "assignment for house of web3",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pasupalati/bot_nodejs_assesment.git"
+  },
+  "keywords": [
+    "node",
+    "assignment"
+  ],
+  "author": "sampath pasupalati",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pasupalati/bot_nodejs_assesment/issues"
+  },
+  "homepage": "https://github.com/Pasupalati/bot_nodejs_assesment#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
