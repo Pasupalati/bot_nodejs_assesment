@@ -1,11 +1,32 @@
 const express = require('express');
+const dotenv = require('dotenv');
+const passport = require('passport');
+const { connectToDatabase } = require('./config/dbConfig');
+require('./config/passpostConfig');
+
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 3434;
+const PORT = process.env.PORT || 3434;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+// Middleware
+app.use(express.json());
+app.use(passport.initialize());
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Example app listening on port ${port}`);
+// Routes
+const indexRoutes = require('./routes/index');
+const userRoutes = require('./routes/userRoutes');
+const todoRoutes = require('./routes/todoRoutes');
+
+app.use('/', indexRoutes);
+app.use('/users', userRoutes);
+app.use('/todos', passport.authenticate('jwt', { session: false }), todoRoutes);
+
+// Start server after database connection
+connectToDatabase().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}).catch(err => {
+    console.error('Failed to connect to the database', err);
 });
