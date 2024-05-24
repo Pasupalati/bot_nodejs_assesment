@@ -27,7 +27,7 @@ exports.login = async (loginData) => {
 
 exports.getUser = async (id) => {
     const db = getDb();
-    const user = await db.collection(COLLECTION_NAME).findOne({ _id: ObjectId(id) });
+    const user = await db.collection(COLLECTION_NAME).findOne({ _id: new ObjectId(id) });
     return user;
 };
 
@@ -36,12 +36,12 @@ exports.updateUser = async (id, userData) => {
     if (userData.password) {
         userData.password = await bcrypt.hash(userData.password, 10);
     }
-    const result = await db.collection(COLLECTION_NAME).updateOne({ _id: ObjectId(id) }, { $set: userData });
+    const result = await db.collection(COLLECTION_NAME).updateOne({ _id: new ObjectId(id) }, { $set: userData });
     return result.modifiedCount > 0 ? userData : null;
 };
 
 exports.deleteUser = async (id) => {
     const db = getDb();
-    const result = await db.collection(COLLECTION_NAME).deleteOne({ _id: ObjectId(id) });
+    const result = await db.collection(COLLECTION_NAME).deleteOne({ _id: new ObjectId(id) });
     return result.deletedCount > 0;
 };

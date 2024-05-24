@@ -30,5 +30,9 @@
     "mongodb": "^6.6.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }

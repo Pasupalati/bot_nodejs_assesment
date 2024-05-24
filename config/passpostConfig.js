@@ -11,7 +11,7 @@ const opts = {
 passport.use(new Strategy(opts, async (jwt_payload, done) => {
     try {
         const db = getDb();
-        const user = await db.collection('users').findOne({ _id: ObjectId(jwt_payload.id) });
+        const user = await db.collection('users').findOne({ _id: new ObjectId(jwt_payload.id) });
         if (user) {
             return done(null, user);
         } else {

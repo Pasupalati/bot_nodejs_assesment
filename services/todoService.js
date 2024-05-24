@@ -17,18 +17,18 @@ exports.getTodos = async () => {
 
 exports.getTodo = async (id) => {
     const db = getDb();
-    const todo = await db.collection(COLLECTION_NAME).findOne({ _id: ObjectId(id) });
+    const todo = await db.collection(COLLECTION_NAME).findOne({ _id: new ObjectId(id) });
     return todo;
 };
 
 exports.updateTodo = async (id, todoData) => {
     const db = getDb();
-    const result = await db.collection(COLLECTION_NAME).updateOne({ _id: ObjectId(id) }, { $set: todoData });
+    const result = await db.collection(COLLECTION_NAME).updateOne({ _id: new ObjectId(id) }, { $set: todoData });
     return result.modifiedCount > 0 ? todoData : null;
 };
 
 exports.deleteTodo = async (id) => {
     const db = getDb();
-    const result = await db.collection(COLLECTION_NAME).deleteOne({ _id: ObjectId(id) });
+    const result = await db.collection(COLLECTION_NAME).deleteOne({ _id: new ObjectId(id) });
     return result.deletedCount > 0;
 };
