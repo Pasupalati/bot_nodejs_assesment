@@ -20,7 +20,7 @@ const connectToDatabase = async () => {
 
     try {
         await client.connect();
-        db = client.db();
+        db = client.db("node_assessment");
         console.log('Connected to MongoDB');
         return db;
     } catch (err) {
